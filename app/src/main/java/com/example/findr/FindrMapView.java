@@ -2,6 +2,7 @@ package com.example.findr;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
@@ -26,6 +27,7 @@ import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.MyLocationOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -52,6 +54,7 @@ public class FindrMapView extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private ArrayList<OverlayItem> mItems = new ArrayList<OverlayItem>();
+    private ArrayList<Event> mEvents = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -69,8 +72,6 @@ public class FindrMapView extends Fragment {
         mapCtrl.setZoom(16);
         mMapView.invalidate();
 
-        mItems.add(new OverlayItem("Title", "Snippet", new GeoPoint(50.0, 60.0)));
-
         return mMapView;
     }
 
@@ -79,6 +80,7 @@ public class FindrMapView extends Fragment {
         double latitude = event.coordinates[0];
         double longitude = event.coordinates[1];
         mItems.add(new OverlayItem(name, name, new GeoPoint(latitude, longitude)));
+        mEvents.add(event);
     }
 
     public void startOverlays() {
@@ -88,6 +90,9 @@ public class FindrMapView extends Fragment {
                 @Override
                 public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                     Log.i("Touch", "icon tapped");
+                    Intent myIntent = new Intent(getActivity(), EventInfoActivity.class);
+                    myIntent.putExtra("event", (Serializable) mEvents.get(index)); //Optional parameters
+                    getActivity().startActivity(myIntent);
                     return true;
                 }
 

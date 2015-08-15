@@ -1,16 +1,35 @@
 package com.example.findr;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.Date;
 
 public class EventInfoActivity extends AppCompatActivity {
+
+    Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
+
+        Intent intent = getIntent();
+
+        event = (Event) intent.getSerializableExtra("event");
+
+        TextView orgby = (TextView) findViewById(R.id.textView);
+        orgby.setText("Organized by " + event.hostName);
+
+        TextView time = (TextView) findViewById(R.id.textView2);
+        Date date = new Date(event.time[0] * 1000);
+        Date endDate = new Date(event.time[1] * 10000);
+        time.setText("This event starts at " + date.getHours() + ":" + date.getMinutes());
+        time.setText("This event ends at " + endDate.getHours() + ":" + endDate.getMinutes());
     }
 
     @Override

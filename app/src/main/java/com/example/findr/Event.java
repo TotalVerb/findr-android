@@ -15,13 +15,14 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
  * Created by Ian on 2015-08-15.
  */
-public class Event {
+public class Event implements Serializable {
     @SerializedName("host-name")
     public String hostName;
 
