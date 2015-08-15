@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.7.12'
+    compile 'org.javalite:javalite-common:1.4.11'
 }

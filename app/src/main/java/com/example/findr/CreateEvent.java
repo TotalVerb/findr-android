@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+
+
 public class CreateEvent extends AppCompatActivity {
 
     @Override
@@ -35,7 +38,5 @@ public class CreateEvent extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private Event[] getEvents() {
 
-    }
 }
