@@ -43,8 +43,8 @@
     <TextView android:text="@string/note" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView9"
-        android:layout_above="@+id/textView8"
-        android:layout_toEndOf="@+id/textView7" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
     <TextView android:text="@string/tags" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
@@ -55,7 +55,7 @@
         android:id="@+id/textView10"
         android:layout_below="@+id/textView9"
         android:layout_alignEnd="@+id/textView9" />
-    <TextView android:text="@string/description" android:layout_width="wrap_content"
+    <TextView android:text="No description" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView6"
         android:layout_below="@+id/textView7"

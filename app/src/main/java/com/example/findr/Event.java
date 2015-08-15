@@ -29,7 +29,7 @@ public class Event implements Serializable {
     @SerializedName("name")
     public String name;
 
-    @SerializedName("contact")
+    @SerializedName("email")
     public String contact;
 
     @SerializedName("location")

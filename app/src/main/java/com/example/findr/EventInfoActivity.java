@@ -28,8 +28,29 @@ public class EventInfoActivity extends AppCompatActivity {
         TextView time = (TextView) findViewById(R.id.textView2);
         Date date = new Date(event.time[0] * 1000);
         Date endDate = new Date(event.time[1] * 10000);
-        time.setText("This event starts at " + date.getHours() + ":" + date.getMinutes());
-        time.setText("This event ends at " + endDate.getHours() + ":" + endDate.getMinutes());
+        time.setText("This event starts at " + date.getHours() + ":" + date.getMinutes() + '\n' +
+            "This event ends at " + endDate.getHours() + ":" + endDate.getMinutes());
+
+        TextView reqs = (TextView) findViewById(R.id.textView4);
+        reqs.setText("You must be " + event.qualifications);
+
+        TextView nameview = (TextView) findViewById(R.id.textView8);
+        nameview.setText(event.name);
+
+        TextView emailview = (TextView) findViewById(R.id.textView7);
+        emailview.setText("Their email is " + event.contact);
+
+        TextView latlong = (TextView) findViewById(R.id.textView15);
+        latlong.setText("Latitude: " + event.coordinates[0] + " Longitude: " + event.coordinates[1]);
+
+        TextView policy = (TextView) findViewById(R.id.textView11);
+        policy.setText("Policy: " + event.policy);
+
+        TextView note = (TextView) findViewById(R.id.textView9);
+        note.setText("Note: " + event.description);
+
+        TextView tags = (TextView) findViewById(R.id.textView5);
+        tags.setText("Tags: " + event.tags);
     }
 
     @Override

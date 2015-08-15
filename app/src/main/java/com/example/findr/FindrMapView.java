@@ -69,7 +69,7 @@ public class FindrMapView extends Fragment {
         IMapController mapCtrl = mMapView.getController();
         Location location = new Location(LocationManager.GPS_PROVIDER);
         mapCtrl.setCenter(new GeoPoint(location));
-        mapCtrl.setZoom(16);
+        mapCtrl.setZoom(5);
         mMapView.invalidate();
 
         return mMapView;
