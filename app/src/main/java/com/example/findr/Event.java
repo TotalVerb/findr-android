@@ -1,6 +1,10 @@
 package com.example.findr;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import org.javalite.http.Get;
 import org.javalite.http.Http;
@@ -8,46 +12,78 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
  * Created by Ian on 2015-08-15.
  */
 public class Event {
-    public String hostName, name, contact, location, description;
-    public String[] tags, qualifications;
-    public Time times;
+    @SerializedName("host-name")
+    public String hostName;
+
+    @SerializedName("name")
+    public String name;
+
+    @SerializedName("contact")
+    public String contact;
+
+    @SerializedName("location")
+    public String location;
+
+    @SerializedName("description")
+    public String description;
+
+    @SerializedName("tags")
+    public String tags;
+
+    @SerializedName("qualifications")
+    public String[] qualifications;
+
+    @SerializedName("time")
+    public int[] time;
+
+    @SerializedName("coordinates")
     public double[] coordinates;
-    public Policy policy;
+
+    @SerializedName("policy")
+    public String policy;
+
+    public static String getHTML(String urlToRead) {
+        URL url;
+        HttpURLConnection conn;
+        BufferedReader rd;
+        String line;
+        StringBuilder result = new StringBuilder();
+        try {
+            url = new URL(urlToRead);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            rd.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
+    }
 
     public static abstract class RetrieveEventsTask extends AsyncTask<String, Void, Event[]> {
 
         private Exception exception;
 
         protected Event[] doInBackground(String... x) {
-            try {
-                Get get = Http.get("https://afternoon-castle-4785.herokuapp.com/events");
-                JSONArray array = new JSONArray(get.text());
-                Event[] events = new Event[array.length()];
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject object = (JSONObject) array.getJSONObject(i);
-                    Event event = new Event();
-                    event.contact = (String) object.get("contact");
-                    event.coordinates = (double[]) object.get("coordinates");
-                    event.description = (String) object.get("description");
-                    event.hostName = (String) object.get("hostName");
-                    event.location = (String) object.get("location");
-                    event.name = (String) object.get("name");
-                    event.policy = object.get("policy").equals("DROP_IN") ? Policy.DROP_IN : Policy.ARRIVE_AT_START;
-                    event.qualifications = (String[]) object.get("qualifications");
-                    event.tags = (String[]) object.get("tags");
-                    event.times = new Time(((long[]) object.get("times"))[0], ((long[]) object.get("times"))[1]);
-                    events[i] = event;
-                }
-                return events;
-            } catch (JSONException e) {
-                throw new RuntimeException("JSON problem " + e.getMessage());
-            }
+            String text = getHTML("https://afternoon-castle-4785.herokuapp.com/events");
+
+            Gson gson = new Gson();
+            Event[] events = gson.fromJson(text, Event[].class);
+
+            return events;
         }
     }
 }
