@@ -53,12 +53,12 @@ public class CreateEvent extends AppCompatActivity {
         event.tags = ((EditText)findViewById(R.id.tags)).getText().toString();
         event.contact = ((EditText)findViewById(R.id.email)).getText().toString();
         double[] coordinates = {2,0}; //todo: implement this
-        DatePicker datePicker = ((DatePicker)findViewById(R.id.datePicker);
-        TimePicker timePicker = ((TimePicker)findViewById(R.id.timePicker);
+        DatePicker datePicker = ((DatePicker)findViewById(R.id.datePicker));
+        TimePicker timePicker = ((TimePicker)findViewById(R.id.timePicker));
         Date date = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
         long[] times = {date.getTime(), date.getTime()+3600};
-        event.times = times;
-        event.policy = ((RadioButton)findViewById(R.id.radioButton)).isSelected() ? Policy.DROP_IN : Policy.ARRIVE_AT_START;
+        event.time = times;
+        event.policy = ((RadioButton)findViewById(R.id.radioButton)).isSelected() ? "drop_in" : "arrive_at_start";
 
         return event;
     }

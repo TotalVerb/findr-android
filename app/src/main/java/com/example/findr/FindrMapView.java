@@ -1,19 +1,32 @@
 package com.example.findr;
 
 import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.api.IMyLocationOverlay;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.ResourceProxyImpl;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.ItemizedIconOverlay;
+import org.osmdroid.views.overlay.ItemizedOverlay;
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
+import org.osmdroid.views.overlay.MyLocationOverlay;
+import org.osmdroid.views.overlay.OverlayItem;
+
+import java.util.ArrayList;
 
 
 /**
@@ -30,24 +43,61 @@ public class FindrMapView extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private ResourceProxyImpl mResourceProxy;
     private MapView mMapView;
+    private LocationManager mLocMgr;
+    private IMyLocationOverlay mMyLocationOverlay;
+    private Context mContext;
 
     private OnFragmentInteractionListener mListener;
+
+    private ArrayList<OverlayItem> mItems = new ArrayList<OverlayItem>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        mResourceProxy = new ResourceProxyImpl(inflater.getContext().getApplicationContext());
+        mContext = inflater.getContext();
+        mResourceProxy = new ResourceProxyImpl(mContext.getApplicationContext());
         mMapView = new MapView(inflater.getContext(), 256, mResourceProxy);
         mMapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
         mMapView.setBuiltInZoomControls(true);
         mMapView.setMultiTouchControls(true);
         mMapView.setUseDataConnection(true);
         IMapController mapCtrl = mMapView.getController();
+        Location location = new Location(LocationManager.GPS_PROVIDER);
+        mapCtrl.setCenter(new GeoPoint(location));
+        mapCtrl.setZoom(16);
         mMapView.invalidate();
+
+        mItems.add(new OverlayItem("Title", "Snippet", new GeoPoint(50.0, 60.0)));
+
         return mMapView;
+    }
+
+    public void addEvent(Event event) {
+        String name = event.name;
+        double latitude = event.coordinates[0];
+        double longitude = event.coordinates[1];
+        mItems.add(new OverlayItem(name, name, new GeoPoint(latitude, longitude)));
+    }
+
+    public void startOverlays() {
+        ItemizedOverlay<OverlayItem> overlay = new ItemizedOverlayWithFocus<OverlayItem>(mContext, mItems,
+            new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+
+                @Override
+                public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                    Log.i("Touch", "icon tapped");
+                    return true;
+                }
+
+                @Override
+                public boolean onItemLongPress(final int index, final OverlayItem item) {
+                    return false;
+                }
+            });
+
+        mMapView.getOverlays().add(overlay);
     }
 
     /**
