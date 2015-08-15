@@ -81,7 +81,12 @@ public class Event {
             String text = getHTML("https://afternoon-castle-4785.herokuapp.com/events");
 
             Gson gson = new Gson();
-            Event[] events = gson.fromJson(text, Event[].class);
+            String[] estrs = gson.fromJson(text, String[].class);
+
+            Event[] events = new Event[estrs.length];
+            for (int i = 0; i < estrs.length; i++) {
+                events[i] = gson.fromJson(estrs[i], Event.class);
+            }
 
             return events;
         }
