@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.ResourceProxyImpl;
+import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 
 
@@ -37,6 +41,15 @@ public class FindrMapView extends Fragment {
     {
         mResourceProxy = new ResourceProxyImpl(inflater.getContext().getApplicationContext());
         mMapView = new MapView(inflater.getContext(), 256, mResourceProxy);
+        mMapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+        mMapView.setBuiltInZoomControls(true);
+        mMapView.setMultiTouchControls(true);
+        mMapView.setUseDataConnection(true);
+        IMapController mapCtrl = mMapView.getController();
+        mapCtrl.setZoom(18);
+        GeoPoint geoP = new GeoPoint(48115436,-1638084);
+        mapCtrl.setCenter(geoP);
+        mMapView.invalidate();
         return mMapView;
     }
 
