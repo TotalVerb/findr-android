@@ -1,14 +1,23 @@
 <resources>
     <string name="app_name">Findr</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="event_name">Physics Club</string>
-    <string name="age_needed">The age requirement for this event is 14-18.</string>
-    <string name="time">The time of this event is 17:00.</string>
+    <string name="host">Bob White</string>
+    <string name="times">This event is from 17:00 to 18:00.</string>
+    <string name="qualifications">You must be interested in Physics.</string>
+    <string name="name">Physics Club</string>
+    <string name="contact">The phone number is: 519–869–9384</string>
+    <string name="location">Latitude: 51.5033630 Longitude: -0.1276250</string>
+    <string name="policy">arrive-at-start</string>
+    <string name="note">Room 243</string>
+    <string name="tags">physics, club, science</string>
+    <integer name="id">9493</integer>
+    <string name="description">This club discusses Physics.</string>
+    <string name="type">duration</string>
+    <string name="start">17:00</string>
+    <string name="end">18:00</string>
     <string name="action_settings">Settings</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_event_info">EventInfoActivity</string>
-    <string name="title_activity_create_event">CreateEvent</string>
 </resources>
