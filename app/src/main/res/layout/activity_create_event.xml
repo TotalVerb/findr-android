@@ -63,7 +63,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText2"
+                    android:id="@+id/hostName"
                     android:layout_column="1" />
             </TableRow>
 
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/editText3"
+                    android:id="@+id/email"
                     android:layout_column="1"
                     android:editable="false" />
             </TableRow>
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/editText7"
+                    android:id="@+id/description"
                     android:layout_column="1"
                     android:editable="false" />
             </TableRow>
@@ -128,7 +128,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText4"
+                    android:id="@+id/location"
                     android:layout_column="1"
                     android:editable="false" />
             </TableRow>
@@ -176,6 +176,26 @@
 
             <TableRow
                 android:layout_width="match_parent"
+                android:layout_heigh="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Time"
+                    android:id="@+id/textView220"
+                    android:layout_column="0" />
+
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timePicker"
+                    android:layout_column="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -191,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
-                    android:id="@+id/">
+                    android:id="@+id/linear">
 
                     <RadioButton
                         android:layout_width="wrap_content"
@@ -219,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Restrictions"
-                    android:id="@+id/textView23"
+                    android:id="@+id/qualifications"
                     android:layout_column="0" />
 
                 <EditText
@@ -244,7 +264,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText5"
+                    android:id="@+id/tags"
                     android:layout_column="1" />
             </TableRow>
             <TableRow

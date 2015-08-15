@@ -10,8 +10,7 @@ import org.json.JSONObject;
  * Created by Ian on 2015-08-15.
  */
 public class Event {
-    public String hostName, name, contact, location, description;
-    public String[] tags, qualifications;
+    public String hostName, name, contact, location, description, tags, qualifications;
     public Time times;
     public double[] coordinates;
     public Policy policy;
@@ -30,8 +29,8 @@ public class Event {
             event.location = (String) object.get("location");
             event.name = (String) object.get("name");
             event.policy = object.get("policy").equals("DROP_IN") ? Policy.DROP_IN : Policy.ARRIVE_AT_START;
-            event.qualifications = (String[]) object.get("qualifications");
-            event.tags = (String[]) object.get("tags");
+            event.qualifications = (String) object.get("qualifications");
+            event.tags = (String) object.get("tags");
             event.times = new Time(((long[]) object.get("times"))[0], ((long[]) object.get("times"))[1]);
         }
     }
