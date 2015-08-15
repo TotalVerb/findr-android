@@ -8,4 +8,9 @@ import java.sql.Timestamp;
 public class Time {
     String type = "duration";
     Timestamp start, end;
+
+    public Time(long start, long end) {
+        this.start = new Timestamp(start);
+        this.end = new Timestamp(end);
+    }
 }
