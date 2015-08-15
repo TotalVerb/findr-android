@@ -4,9 +4,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONException;
 import org.osmdroid.util.ResourceProxyImpl;
 import org.osmdroid.views.MapView;
 
@@ -17,6 +19,20 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final FindrMapView frag = (FindrMapView) getFragmentManager().findFragmentById(R.id.fragment);
+
+        Event.RetrieveEventsTask task = new Event.RetrieveEventsTask() {
+            protected void onPostExecute(Event[] events) {
+                Log.println(Log.DEBUG, "MainActivity-Event", "post execute");
+                for (Event ev : events) {
+                    frag.addEvent(ev);
+                }
+                frag.startOverlays();
+            }
+        };
+
+        task.execute();
     }
 
     @Override
