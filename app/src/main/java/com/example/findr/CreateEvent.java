@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
+import android.widget.EditText;
 
 
 public class CreateEvent extends AppCompatActivity {
+    String[] textfields = {"name","hostName","description","location", "qualifications", "tags"}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,14 @@ public class CreateEvent extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Event create() {
+        EditText text;
+
+        for (String s in textfields) {
+
+        }
     }
 
 
