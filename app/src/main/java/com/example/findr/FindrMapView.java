@@ -67,9 +67,8 @@ public class FindrMapView extends Fragment {
         mMapView.setMultiTouchControls(true);
         mMapView.setUseDataConnection(true);
         IMapController mapCtrl = mMapView.getController();
-        Location location = new Location(LocationManager.GPS_PROVIDER);
-        mapCtrl.setCenter(new GeoPoint(location));
-        mapCtrl.setZoom(5);
+        mapCtrl.setCenter(new GeoPoint(43.5, -80.5));
+        mapCtrl.setZoom(10);
         mMapView.invalidate();
 
         return mMapView;
