@@ -1,8 +1,7 @@
 # Findr
 
-This is of Findr's Android app. Fully open sorce and under a "Gnu General Public Licence".
+This is the Findr Android app. See LICENSE for licencing information.
 
-What is Findr?
-----------
+## What is Findr?
 
-Finder can locate near by, and far away events all around the world. It can help you stay connected to your soroundings and give you detail time and info on that event.
+Findr can locate nearby and faraway events all around the world. It can help you stay connected to your surroundings and provides detailed information about events.
